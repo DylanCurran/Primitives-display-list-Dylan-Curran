@@ -3,7 +3,7 @@
 #include <SFML/OpenGL.hpp>
 #include <gl/GL.h>
 #include <gl/GLU.h>
-
+//@author dylan Curran
 using namespace std;
 using namespace sf;
 

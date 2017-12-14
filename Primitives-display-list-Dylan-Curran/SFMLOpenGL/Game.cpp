@@ -1,13 +1,18 @@
+//@auhtor Dylan Curran
 #include <Game.h>
 
 Game::Game() : window(VideoMode(800, 600), "OpenGL"), primatives(2)
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); 
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45.0, window.getSize().x / window.getSize().y, 1.0, 500.0);
 	glMatrixMode(GL_MODELVIEW);
-	
+	std::cout << "Nums to display shapes" << std::endl;
+	std::cout << "E,R,T to rotate" << std::endl;
+	std::cout << "V,B,N to translate" << std::endl;
+	std::cout << "A,S,D to scale" << std::endl;
+	std::cout << "X,Y,Z axis respectively for each" << std::endl;
 }
 
 Game::~Game() {}
@@ -21,7 +26,7 @@ void Game::run()
 
 	while (isRunning) {
 
-		cout << "Game running..." << endl;
+
 
 		while (window.pollEvent(event))
 		{
@@ -43,139 +48,181 @@ void Game::initialize()
 
 void Game::update()
 {
-	cout << "Update up" << endl;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		glRotatef(rotationAngle, 1.0f, 0.0f, 0.0f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	{
+		glRotatef(rotationAngle, 0.0f, 1.0f, 0.0f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+	{
+		glRotatef(rotationAngle, 0.0f, 0.0f, 1.0f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+	{
+		glTranslatef(0.00069f, 0.000f, -0.000f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+	{
+		glTranslatef(0.000f, 0.00069f, -0.000f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+	{
+		glTranslatef(0.000f, 0.000f, -0.00069f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		glScalef(1.0005f, 1.000f, 1.000f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		glScalef(1.000f, 1.0005f, 1.000f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		glScalef(1.000f, 1.000f, 1.0005f);
+	}
 }
 
 void Game::draw()
 {
-	cout << "Draw up" << endl;
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glBegin(GL_TRIANGLES);
-	//{
-	//glVertex3f(0.0, 2.0, -10.0);
-	//glVertex3f(-2.0, -2.0, -10.0);
-	//glVertex3f(2.0, -2.0, -10.0);
-	//} 
-	//glEnd();
-
-	/*glBegin(GL_POINTS);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 	{
-		
-		glPointSize(10.0f);
-		glVertex3f(2.0, 2.0, -10.0);
-		glVertex3f(-2.0, 2.0, -10.0);
-		glVertex3f(0.0, -2.0, -10.0);
-		
+		glBegin(GL_TRIANGLES);
+		{
+			glVertex3f(0.0, 2.0, -10.0);
+			glVertex3f(-2.0, -2.0, -10.0);
+			glVertex3f(2.0, -2.0, -10.0);
+		}
+		glEnd();
 	}
-	glEnd();*/
-
-	//glBegin(GL_POINTS);
-	//{
-	//	glPointSize(10.f);
-	//	glVertex3f(4.0, 4.0, -10.0);
-	//	glVertex3f(-4.0, 4.0, -10.0);
-	//	glVertex3f(0.0, -4.0, -10.0);
-	//}
-	//glEnd();
-
-	//glBegin(GL_LINE_STRIP);
-	//{
-	//	glPointSize(10.f);
-	//	glVertex3f(4.0, 4.0, -10.0);
-	//	glVertex3f(-4.0, 4.0, -10.0);
-	//	glVertex3f(0.0, -4.0, -10.0);
-	//	glVertex3f(0.0, 4.0, -10.0);
-	//}
-	//glEnd();
-
-	glBegin(GL_LINE_LOOP);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
 	{
-		glPointSize(10.f);
-		glVertex3f(3.0, 0.0, -10.0);
-		glVertex3f(-3.0, 3.0, -10.0);
-		glVertex3f(0.0, -3.0, -10.0);
-		glVertex3f(0.0, 3.0, -10.0);
-	}
-	glEnd();
+		glBegin(GL_POINTS);
+		{
 
-	/*glBegin(GL_TRIANGLES);
+			glPointSize(10.0f);
+			glVertex3f(2.0, 2.0, -10.0);
+			glVertex3f(-2.0, 2.0, -10.0);
+			glVertex3f(0.0, -2.0, -10.0);
+
+		}
+		glEnd();
+	}
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
 	{
-		glPointSize(10.f);
-		glVertex3f(3.0, 3.0, -10.0);
-		glVertex3f(-3.0, 3.0, -10.0);
-		glVertex3f(0.0, -3.0, -10.0);
-		
+		glBegin(GL_LINE_STRIP);
+		{
+			glPointSize(10.f);
+			glVertex3f(4.0, 4.0, -10.0);
+			glVertex3f(-4.0, 4.0, -10.0);
+			glVertex3f(0.0, -4.0, -10.0);
+			glVertex3f(0.0, 4.0, -10.0);
+		}
+		glEnd();
 	}
-	glEnd();*/
-
-	/*glBegin(GL_TRIANGLE_STRIP);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
 	{
-		glPointSize(10.f);
-		glVertex3f(3.0, 3.0, -10.0);
-		glVertex3f(-1.0, 1.0, -10.0);
-		glVertex3f(0.0, 2.0, -10.0);
-		glVertex3f(0.0, -4.0, -10.0);
-		
+		glBegin(GL_LINE_LOOP);
+		{
+			glPointSize(10.f);
+			glVertex3f(3.0, 0.0, -10.0);
+			glVertex3f(-3.0, 3.0, -10.0);
+			glVertex3f(0.0, -3.0, -10.0);
+			glVertex3f(0.0, 3.0, -10.0);
+		}
+		glEnd();
 	}
-	glEnd();*/
-
-	//glBegin(GL_TRIANGLE_FAN);
-	//{
-	//	glPointSize(10.f);
-	//	glVertex3f(0.0, 0.0, -10.0);
-	//	glVertex3f(2.0, 0.0, -10.0);
-	//	glVertex3f(1.0, 1.0, -10.0);
-	//	glVertex3f(-1.0, 1.0, -10.0);
-	//	glVertex3f(-2.0, 0.0, -10.0);
-	//	glVertex3f(-1.0, -1.0, -10.0);
-	//	glVertex3f(1.0, -1.0, -10.0);
-	//}
-	//glEnd();
-
-	//glBegin(GL_QUADS);
-	//{
-	//	glPointSize(10.f);
-	//	glVertex3f(3.0, 3.0, -10.0);
-	//	glVertex3f(3.0, -3.0, -10.0);
-	//	glVertex3f(-3.0, -3.0, -10.0);
-	//	glVertex3f(-3.0, 3.0, -10.0);
-	//	
-	//}
-	//glEnd();
-
-	/*glBegin(GL_QUAD_STRIP);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
 	{
-		glPointSize(10.f);
-		glVertex3f(-3.0, -3.0, -10.0);
-		glVertex3f(-3.0, 3.0, -10.0);
-		glVertex3f(0.0, -3.0, -10.0);
-		glVertex3f(0.0, 3.0, -10.0);
-		glVertex3f(3.0, -3.0, -10.0);
-		glVertex3f(3.0, 3.0, -10.0);
-	}
-	glEnd();*/
+		glBegin(GL_TRIANGLES);
+		{
+			glPointSize(10.f);
+			glVertex3f(3.0, 3.0, -10.0);
+			glVertex3f(-3.0, 3.0, -10.0);
+			glVertex3f(0.0, -3.0, -10.0);
 
-	/*glBegin(GL_POLYGON);
+		}
+		glEnd();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
 	{
-		glPointSize(10.f);
-		glVertex3f(0.0, 3.0, -10.0);
-		glVertex3f(2.0, 2.0, -10.0);
-		glVertex3f(3.0, 0.0, -10.0);
-		glVertex3f(2.0, -2.0, -10.0);
-		glVertex3f(0.0, -3.0, -10.0);
-		glVertex3f(-2.0, -2.0, -10.0);
-		glVertex3f(-3.0, 0.0, -10.0);
-		glVertex3f(-2.0, 2.0, -10.0);
-		glVertex3f(0.0, 3.0, -10.0);
+		glBegin(GL_TRIANGLE_STRIP);
+		{
+			glPointSize(10.f);
+			glVertex3f(3.0, 3.0, -10.0);
+			glVertex3f(-1.0, 1.0, -10.0);
+			glVertex3f(0.0, 2.0, -10.0);
+			glVertex3f(0.0, -4.0, -10.0);
+
+		}
+		glEnd();
 	}
-	glEnd();*/
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
+	{
+		glBegin(GL_TRIANGLE_FAN);
+		{
+			glPointSize(10.f);
+			glVertex3f(0.0, 0.0, -10.0);
+			glVertex3f(2.0, 0.0, -10.0);
+			glVertex3f(1.0, 1.0, -10.0);
+			glVertex3f(-1.0, 1.0, -10.0);
+			glVertex3f(-2.0, 0.0, -10.0);
+			glVertex3f(-1.0, -1.0, -10.0);
+			glVertex3f(1.0, -1.0, -10.0);
+		}
+		glEnd();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8))
+	{
+		glBegin(GL_QUADS);
+		{
+			glPointSize(10.f);
+			glVertex3f(3.0, 3.0, -10.0);
+			glVertex3f(3.0, -3.0, -10.0);
+			glVertex3f(-3.0, -3.0, -10.0);
+			glVertex3f(-3.0, 3.0, -10.0);
 
-
-	//glRotatef(rotationAngle, 0.0f, 0.0f, 1.0f);
-
-	//glTranslatef(0.000f, 0.000f, -0.00069f);
-	
-	glScalef(1.0005f, 1.0005f, 1.000f);
+		}
+		glEnd();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9))
+	{
+		glBegin(GL_QUAD_STRIP);
+		{
+			glPointSize(10.f);
+			glVertex3f(-3.0, -3.0, -10.0);
+			glVertex3f(-3.0, 3.0, -10.0);
+			glVertex3f(0.0, -3.0, -10.0);
+			glVertex3f(0.0, 3.0, -10.0);
+			glVertex3f(3.0, -3.0, -10.0);
+			glVertex3f(3.0, 3.0, -10.0);
+		}
+		glEnd();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
+	{
+		glBegin(GL_POLYGON);
+		{
+			glPointSize(10.f);
+			glVertex3f(0.0, 3.0, -10.0);
+			glVertex3f(2.0, 2.0, -10.0);
+			glVertex3f(3.0, 0.0, -10.0);
+			glVertex3f(2.0, -2.0, -10.0);
+			glVertex3f(0.0, -3.0, -10.0);
+			glVertex3f(-2.0, -2.0, -10.0);
+			glVertex3f(-3.0, 0.0, -10.0);
+			glVertex3f(-2.0, 2.0, -10.0);
+			glVertex3f(0.0, 3.0, -10.0);
+		}
+		glEnd();
+	}
 
 
 	window.display();
@@ -183,6 +230,6 @@ void Game::draw()
 
 void Game::unload()
 {
-	cout << "Cleaning up" << endl;
+
 }
 
